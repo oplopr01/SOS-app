@@ -59,12 +59,13 @@ if (Array.isArray(data)) {
               services .slice()
   .sort((a, b) => a.distance - b.distance).map((s) => (
                 <li key={s.id}>
-                  {s.name} ({s.type}) - {s.distance} km  <a
-                    href={`https://www.google.com/maps?q=${s.lat},${s.lng}`}
-                    target="_blank"
-                  >
-                    Navigate
-                  </a>
+      {s.name} ({s.type}) - {s.distance} km  <a
+        href={`https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}&travelmode=driving`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Navigate
+      </a>
                 </li>
                 
               ))

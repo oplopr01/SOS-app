@@ -56,10 +56,17 @@ if (Array.isArray(data)) {
       ) : (
         <ul>
             {Array.isArray(services) && services.length > 0 ? (
-              services.map((s) => (
+              services .slice()
+  .sort((a, b) => a.distance - b.distance).map((s) => (
                 <li key={s.id}>
-                  {s.name} ({s.type})
+                  {s.name} ({s.type}) - {s.distance} km  <a
+                    href={`https://www.google.com/maps?q=${s.lat},${s.lng}`}
+                    target="_blank"
+                  >
+                    Navigate
+                  </a>
                 </li>
+                
               ))
             ) : (
               <p>No nearby services found</p>

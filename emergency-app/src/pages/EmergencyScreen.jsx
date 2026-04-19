@@ -35,6 +35,15 @@ if (Array.isArray(data)) {
   loadData();
 }, [location]);
   if (!location) return <p>No location</p>;
+  if (!navigator.onLine) {
+  return (
+    <div>
+      <h2>Offline Mode</h2>
+      <p>Call emergency number immediately</p>
+      <a href="tel:112">Call 112</a>
+    </div>
+  );
+}
 
   return (
     <div>

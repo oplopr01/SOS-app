@@ -4,9 +4,9 @@ import './index.css'
 import App from './App.jsx'
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-
+import { registerSW } from 'virtual:pwa-register'
 delete L.Icon.Default.prototype._getIconUrl;
-
+registerSW({ immediate: true })
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
   iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",

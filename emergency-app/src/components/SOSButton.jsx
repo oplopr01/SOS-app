@@ -23,13 +23,13 @@ function SOSButton() {
 
 const styles = {
   button: {
-    backgroundColor: "red",
-    color: "white",
-    fontSize: "32px",
-    padding: "40px",
-    borderRadius: "50%",
-    border: "none",
-  },
+  backgroundColor: "red",
+  color: "white",
+  fontSize: "40px",
+  padding: "60px",
+  borderRadius: "50%",
+  border: "none",
+}
 };
 
 export default SOSButton;

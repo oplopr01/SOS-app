@@ -5,14 +5,34 @@ import { fetchNearbyServices } from "../services/api";
 
 function EmergencyScreen() {
   const { state } = useLocation();
-  const location = state?.location;
+  let location = state?.location;
+
+  if (!location) {
+    const saved = localStorage.getItem("lastLocation");
+    if (saved) {
+      location = JSON.parse(saved);
+    }
+  }
 
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+    useEffect(() => {
+    if (location) {
+      localStorage.setItem(
+        "lastLocation",
+        JSON.stringify({
+          lat: location.lat,
+          lng: location.lng,
+          timestamp: Date.now(),
+        })
+      );
+    }
     const loadData = async () => {
-      if (!location) return;
+      if (!location || !navigator.onLine) {
+        setLoading(false);
+        return;
+      }
 
       try {
         const data = await fetchNearbyServices(
@@ -34,13 +54,12 @@ function EmergencyScreen() {
 
     loadData();
   }, [location]);
-  if (!location) return <p>No location</p>;
-  if (!navigator.onLine) {
+  if (!location) {
     return (
       <div>
-        <h2>Offline Mode</h2>
-        <p>Call emergency number immediately</p>
-        <a href="tel:112">Call 112</a>
+        <h2>Emergency Mode</h2>
+        <p>No location data available.</p>
+        <a href="tel:112">📞 Call 112</a>
       </div>
     );
   }
@@ -48,13 +67,21 @@ function EmergencyScreen() {
   return (
     <div>
       <h2>Emergency Activated</h2>
-
+      {!navigator.onLine && (
+        <p style={{ color: "orange" }}>
+          ⚠️ You are offline. Showing last known location.
+        </p>
+      )}
       <MapView lat={location.lat} lng={location.lng} services={services} />
+
+      <a href="tel:112" style={{ display: "block", margin: "10px 0" }}>
+        📞 Call Emergency (112)
+      </a>
 
       {loading ? (
         <p>Loading nearby services...</p>
       ) : (
-        <ul>
+        <ul style={{ textAlign: "left" }}>
           {Array.isArray(services) && services.length > 0 ? (
             services.slice()
               .sort((a, b) => a.distance - b.distance).map((s) => (
@@ -69,6 +96,7 @@ function EmergencyScreen() {
                   >
                     Navigate
                   </button>
+                  <div>-----------------------------------------------------</div>
                 </li>
 
               ))

@@ -64,6 +64,15 @@ function EmergencyScreen() {
     );
   }
 
+  const handleShare = () => {
+    if (!location) return;
+
+    const message = `I need help. My location: https://maps.google.com/?q=${location.lat},${location.lng}`;
+    const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+
+    window.open(url, "_blank");
+  };
+
   return (
     <div>
       <h2>Emergency Activated</h2>
@@ -77,7 +86,19 @@ function EmergencyScreen() {
       <a href="tel:112" style={{ display: "block", margin: "10px 0" }}>
         📞 Call Emergency (112)
       </a>
-
+      <button
+        onClick={handleShare}
+        style={{
+          margin: "10px 0",
+          padding: "10px",
+          background: "#25D366",
+          color: "white",
+          border: "none",
+          borderRadius: "5px"
+        }}
+      >
+        📤 Share Location (WhatsApp)
+      </button>
       {loading ? (
         <p>Loading nearby services...</p>
       ) : (

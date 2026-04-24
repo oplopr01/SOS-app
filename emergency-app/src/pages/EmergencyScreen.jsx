@@ -16,6 +16,12 @@ function EmergencyScreen() {
 
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [contacts, setContacts] = useState([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("contacts");
+    if (saved) setContacts(JSON.parse(saved));
+  }, []);
 
     useEffect(() => {
     if (location) {
@@ -86,6 +92,17 @@ function EmergencyScreen() {
       <a href="tel:112" style={{ display: "block", margin: "10px 0" }}>
         📞 Call Emergency (112)
       </a>
+      {contacts.length > 0 && (
+        <div>
+          <h4>Call Contacts</h4>
+          {contacts.map((c) => (
+            <a key={c.id} href={`tel:${c.phone}`}>
+              📞 {c.name}
+            </a>
+          ))}
+        </div>
+      )}
+
       <button
         onClick={handleShare}
         style={{

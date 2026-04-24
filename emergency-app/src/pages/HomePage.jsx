@@ -1,6 +1,8 @@
 import SOSButton from "../components/SOSButton";
-
+import { useState } from "react";
+import ContactsModal from "../components/ContactsModal";
 function HomePage() {
+  const [openModal, setOpenModal] = useState(false);
   return (
     <div style={styles.container}>
       <h1>🚨 Emergency Assistant</h1>
@@ -12,6 +14,9 @@ function HomePage() {
       <div style={styles.infoBox}>
         <p><strong>How it helps:</strong></p>
         <ul>
+          <button onClick={() => setOpenModal(true)}>
+            Manage Contacts
+          </button>
           <li>📍 Detects your current location</li>
           <li>🏥 Shows nearest hospitals & police stations</li>
           <li>🗺️ Provides navigation instantly</li>
@@ -27,6 +32,11 @@ function HomePage() {
       <p style={{ fontSize: "12px", color: "gray" }}>
         ⚠️ Allow location access for accurate results
       </p>
+
+      <ContactsModal
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+      />
     </div>
   );
 }

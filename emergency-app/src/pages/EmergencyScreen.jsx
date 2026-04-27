@@ -162,40 +162,43 @@ My location: https://maps.google.com/?q=${location.lat},${location.lng}`;
 const styles = {
   callBtn: {
     display: "block",
-    margin: "10px 0",
-    padding: "12px",
+    margin: "5px 0",
+    padding: "6px",
     background: "red",
     color: "white",
     textAlign: "center",
-    borderRadius: "8px",
+    borderRadius: "6px",
     textDecoration: "none",
-    fontWeight: "bold",
+    fontWeight: "600",
+    fontSize: "14px",
   },
 
   contactRow: {
     display: "flex",
-    gap: "8px",
+    gap: "4px",
     marginBottom: "6px",
   },
 
   callSmallBtn: {
     flex: 1,
-    padding: "8px",
+    padding: "7px",
     background: "#eee",
-    borderRadius: "6px",
+    borderRadius: "5px",
     textDecoration: "none",
     color: "black",
     textAlign: "center",
+    fontSize: "13px",
   },
 
   whatsappSmallBtn: {
     flex: 1,
-    padding: "8px",
+    padding: "7px",
     background: "#25D366",
     color: "white",
     border: "none",
-    borderRadius: "6px",
+    borderRadius: "5px",
     cursor: "pointer",
+    fontSize: "13px",
   },
 };
 

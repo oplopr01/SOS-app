@@ -1,8 +1,20 @@
 import SOSButton from "../components/SOSButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ContactsModal from "../components/ContactsModal";
+
 function HomePage() {
   const [openModal, setOpenModal] = useState(false);
+  const [contactsCount, setContactsCount] = useState(0);
+
+  // Load contacts count
+  useEffect(() => {
+    const saved = localStorage.getItem("contacts");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      setContactsCount(parsed.length);
+    }
+  }, [openModal]); // refresh when modal opens/closes
+
   return (
     <div style={styles.container}>
       <h1>🚨 Emergency Assistant</h1>
@@ -13,15 +25,20 @@ function HomePage() {
 
       <div style={styles.infoBox}>
         <p><strong>How it helps:</strong></p>
-        <ul>
-          <button onClick={() => setOpenModal(true)}>
-            Manage Contacts
-          </button>
+
+        <ul style={{ paddingLeft: "18px" }}>
           <li>📍 Detects your current location</li>
           <li>🏥 Shows nearest hospitals & police stations</li>
           <li>🗺️ Provides navigation instantly</li>
           <li>📞 One-tap call to emergency services</li>
         </ul>
+
+        <button
+          onClick={() => setOpenModal(true)}
+          style={styles.contactBtn}
+        >
+          ➕ Manage Emergency Contacts ({contactsCount})
+        </button>
       </div>
 
       <p style={styles.instruction}>
@@ -64,11 +81,23 @@ const styles = {
     marginBottom: "15px",
     textAlign: "left",
     maxWidth: "300px",
+    color: "white",
   },
 
   instruction: {
     marginBottom: "20px",
     fontWeight: "bold",
+  },
+
+  contactBtn: {
+    marginTop: "10px",
+    width: "100%",
+    padding: "8px",
+    borderRadius: "6px",
+    border: "none",
+    background: "#25D366",
+    color: "white",
+    cursor: "pointer",
   },
 };
 

@@ -17,7 +17,9 @@ function HomePage() {
 
   return (
     <div style={styles.container}>
-      <h1>🚨 Emergency Assistant</h1>
+      <h1 style={styles.title}>
+        🚨<br />Emergency Assistant
+      </h1>
 
       <p style={styles.subtitle}>
         Get immediate help during emergencies with one tap.
@@ -99,6 +101,14 @@ const styles = {
     color: "white",
     cursor: "pointer",
   },
+  title: {
+  textAlign: "center",
+  width: "100%",
+  fontSize: "20px",
+  lineHeight: "1.3",
+  wordBreak: "break-word",
+  marginBottom: "10px",
+},
 };
 
 export default HomePage;

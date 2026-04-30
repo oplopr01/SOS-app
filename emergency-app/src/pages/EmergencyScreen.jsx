@@ -149,25 +149,35 @@ My location: https://maps.google.com/?q=${location.lat},${location.lng}`;
   }
 
   const recognition = new SpeechRecognition();
+
   recognition.lang = "en-US";
+  recognition.continuous = false;   // keep false (single command)
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  setIsListening(true);
 
   recognition.start();
-  setIsListening(true); // 🔴 START
+
+  recognition.onstart = () => {
+    setIsListening(true);
+  };
 
   recognition.onresult = (event) => {
     const text = event.results[0][0].transcript;
     setUserInput(text);
   };
 
-  recognition.onend = () => {
-    setIsListening(false); // 🟢 STOP
-  };
-
-  recognition.onerror = () => {
+ recognition.onend = () => {
+  setTimeout(() => {
+    setIsListening(false);
+  }, 300);
+};
+  recognition.onerror = (event) => {
+    console.error("Speech error:", event.error);
     setIsListening(false);
   };
 };
-
   return (
     <div>
       <h2>Emergency Activated</h2>

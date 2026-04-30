@@ -108,6 +108,7 @@ const styles = {
   lineHeight: "1.3",
   wordBreak: "break-word",
   marginBottom: "5px",
+  marginTop:"1px"
 },
 };
 

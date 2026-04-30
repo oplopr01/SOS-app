@@ -104,10 +104,10 @@ const styles = {
   title: {
   textAlign: "center",
   width: "100%",
-  fontSize: "20px",
+  fontSize: "26px",
   lineHeight: "1.3",
   wordBreak: "break-word",
-  marginBottom: "10px",
+  marginBottom: "5px",
 },
 };
 
